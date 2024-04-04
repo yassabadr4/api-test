@@ -1,5 +1,6 @@
 import 'package:api_test/core/api/dio_consumer.dart';
 import 'package:api_test/cubit/user_cubit.dart';
+import 'package:api_test/repositories/user_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,14 +13,14 @@ void main() {
   CacheHelper().init();
   runApp(
     BlocProvider(
-      create: (context) => UserCubit(DioConsumer(dio: Dio())),
+      create: (context) => UserCubit(UserRepository(api: DioConsumer(dio: Dio()))),
       child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
